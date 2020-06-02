@@ -1,0 +1,29 @@
+:-[append].
+quicksort([],[]).
+quicksort([X],[X]):-!.
+quicksort([Pivot|Unsorted],Sorted):-
+	partition(Unsorted,Left,Pivot,Right),
+	quicksort(Left,SortedLeft1),
+	quicksort(Right,SortedRight),
+	append1(SortedLeft1,[Pivot],SortedLeft),
+	merge(SortedLeft,SortedRight,Sorted).
+
+partition([],[],_,[]).
+partition([X|R],[X|Left],Pivot,Right):-
+	X=<Pivot,!,
+	partition(R,Left,Pivot,Right).
+partition([X|R],Left,Pivot,[X|Right]):-
+	X>Pivot,
+	partition(R,Left,Pivot,Right).
+
+merge(L,[],L).
+merge([],L,L).
+merge([X|L1],[Y|L2],[X|L3]):-
+	X<Y,!,
+	merge(L1,[Y|L2],L3).
+merge([X|L1],[Y|L2],[Y|L3]):-
+	X>Y,!,
+	merge([X|L1],L2,L3).
+merge([X|L1],[Y|L2],[X|[Y|L3]]):-
+	X=Y,
+	merge(L1,L2,L3).

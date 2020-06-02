@@ -1,0 +1,14 @@
+ssort([],[]).
+ssort(L,[X|L1]):-
+	minlist(L,X),
+	sel(X,L,R),!,
+	ssort(R,L1).
+minlist([X],X).
+minlist([H|T],H):-
+	minlist(T,Min),
+	H<Min,!.
+minlist([H|T],Min):-
+	minlist(T,Min).
+sel(X,[X|L],L).
+sel(X,[H|T],[H|L1]):-
+	sel(X,T,L1).

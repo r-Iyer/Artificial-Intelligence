@@ -1,0 +1,15 @@
+:-[append].
+bubble_sort([],[]):-!.
+bubble_sort([X],[X]):-!.
+bubble_sort(L,L1):-
+	bubble(L,L2),
+	write(L2),nl,
+	append1(L3,[X],L2),
+	bubble_sort(L3,L4),
+	append1(L4,[X],L1).
+bubble([X],[X]):-!.
+bubble([X|[Y|L]],[Y|L1]):-
+	X=>Y,!,
+	bubble([X|L],L1).
+bubble([X|[Y|L]],[X|L1]):-
+	bubble([Y|L],L1).

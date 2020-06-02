@@ -1,0 +1,12 @@
+duplicate(L):-
+	not(dup(L)).
+dup([]).
+dup([X|L]):-
+	dup(L),
+	not(our_member(X,L)).   
+not(P):-
+	P,
+	!,
+	false.
+not(P):-
+	true.

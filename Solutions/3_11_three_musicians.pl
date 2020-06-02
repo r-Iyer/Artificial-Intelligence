@@ -1,0 +1,18 @@
+musician(S):-
+	band_musicians(S),
+	first(X,S),plays(X,piano),ordered_members(Y,Z,S),named(Y,john),
+	plays(Y,sax),country(Z,australia),
+	ordered_members(Y1,Z1,S),
+	named(Y1,mark),plays(Z1,violin),country(Y1,us),
+	member(U,S),country(U,japan),member(V,S),named(V,sam),!.
+band_musicians(band(musicians(N1,I1,C1),musicians(N2,I2,C2),musicians(N3,I3,C3))).
+first(X,band(X,_,_)).
+plays(musicians(_,X,_),X).
+country(musicians(_,_,Z),Z).
+named(musicians(N,_,_),N).
+ordered_members(X,Y,band(X,Y,Z)).
+ordered_members(Y,Z,band(X,Y,Z)).
+ordered_members(X,Z,band(X,Y,Z)).
+member(X,band(X,Y,Z)).
+member(Y,band(X,Y,Z)).
+member(Z,band(X,Y,Z)).

@@ -1,0 +1,11 @@
+interleave([],[],[]).
+interleave([],[X],[X]).
+interleave([X],[],[X]).
+interleave([H1|L1],[H2|L2],[H1|[H2|L]]):-
+	len(L1,X),
+	len(L2,Y),
+	X>Y,
+	!,
+	interleave(L1,L2,L).
+interleave([H1|L1],[H2|L2],[H2|[H1|L]]):-
+	interleave(L1,L2,L).

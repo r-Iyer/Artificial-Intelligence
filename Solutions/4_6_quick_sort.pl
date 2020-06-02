@@ -1,0 +1,14 @@
+quicksort(L,L1):-
+	quickacc(L,[],L1).
+quickacc([],A,A).
+quickacc([Pivot|T],A,L1):-
+	partition(T,Left,Pivot,Right),
+	quickacc(Right,A,RightSorted),
+	quickacc(Left,[Pivot|RightSorted],L1).
+partition([],[],_,[]).
+partition([X|R],[X|Left],Pivot,Right):-
+	X=<Pivot,!,
+	partition(R,Left,Pivot,Right).
+partition([X|R],Left,Pivot,[X|Right]):-
+	X>Pivot,
+	partition(R,Left,Pivot,Right).
